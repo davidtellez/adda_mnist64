@@ -1,30 +1,34 @@
-### DCGAN MNIST 64x64
+### ADDA MNIST 64x64
 
-Implementation of a DCGAN system to generate realistic MNIST digits at 64x64 resolution in Tensorflow. After 40 epochs of training, you should get these results:
+Given the MNIST 64x64 handwritten recognition dataset, we define the following two sets as "source" and "target":
 
 <p align="center">
-<img src="/tensorboard/20170129183030_mnist64_jupyter/plots/epoch_0040_g.png" alt="Artificial MNIST images" height="200">
-
-<img src="/tensorboard/20170129183030_mnist64_jupyter/plots/loss.png" alt="Loss" height="200">
-
-<img src="/tensorboard/20170129183030_mnist64_jupyter/plots/discriminator_output.png" alt="Discriminator output" height="200">
+<img src="/resources/source_domain.png" alt="Source MNIST domain" height="400">
+<img src="/resources/target_domain.png" alt="Target MNIST domain" height="400">
 </p>
+
+The goal is to maximize the accuracy of a classifier on the "target" set. However, **labels are only available for the "source" set**. We formulate the task as a **domain adaptation problem in adversarial terms**. Two networks, the classifier and the domain discriminator, compete to optimize opposite objectives. 
+
+In particular, the discriminator predicts whether a sample image belongs to the "source" or the "target" domains, **accessing features from the input images through the classifier network only**. At the same time, the classifier has two simultaneous objectives: a) recognizing digits from the "source" domain in a supervised fashion, and b) **fooling the discriminator** by maximizing its classification error.
+
+The idea behind adversarial domain adaptation is that **the classifier will eventually learn to hide features that are useful to discriminate between domains**. By doing so, it becomes robust against domain differences and improves its classification accuracy in the "target" set.
+
+### Results
+
+
 
 ### Usage
 
-1. Launch ```jupyter notebook``` and browse to ```http://localhost:8888/```
-2. Open [DCGAN MNIST tutorial.ipynb](DCGAN MNIST tutorial.ipynb)
-3. Run all to start training
-4. Use Tensorboard to monitor the training: ```tensorboard --logdir YOUR_DIR``` and browse to ```http://localhost:6006/```
+- Simply execute ```python train.py```
 
 ### Requisites
 
-- [Anaconda Python 3.5](https://www.continuum.io/downloads)
-- [Tensorflow 0.12.0-rc1](https://www.tensorflow.org/)
-- GPU for fast training (although CPU-only is supported)
+- [Anaconda Python 2.5](https://www.continuum.io/downloads)
+- [Lasagne 0.2.dev1](http://lasagne.readthedocs.io/)
+- [Theano 0.9](http://deeplearning.net/software/theano/)
+- GPU for fast training
 
 ### References
 
-- [Generative Adversarial Networks](http://arxiv.org/abs/1406.2661)
-- [Unsupervised Representation Learning with Deep Convolutional Generative Adversarial Networks](http://arxiv.org/abs/1511.06434)
-- [Image Completion with Deep Learning in TensorFlow](http://bamos.github.io/2016/08/09/deep-completion/)
+- [Domain-Adversarial Training of Neural Networks](https://arxiv.org/abs/1505.07818)
+- [Adversarial Discriminative Domain Adaptation](https://arxiv.org/abs/1702.05464)
