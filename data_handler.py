@@ -14,7 +14,7 @@ class DataHandler(object):
         self.X_train, self.y_train, self.X_val, self.y_val, self.X_test, self.y_test = self.load_dataset()
 
         # Load Lena image to memory
-        self.lena = Image.open('lena.jpg')
+        self.lena = Image.open('resources/lena.jpg')
 
     def load_dataset(self):
         # Credit for this function: https://github.com/Lasagne/Lasagne/blob/master/examples/mnist.py
@@ -57,10 +57,10 @@ class DataHandler(object):
             return data
 
         # We can now download and read the training and test set images and labels.
-        X_train = load_mnist_images('train-images-idx3-ubyte.gz')
-        y_train = load_mnist_labels('train-labels-idx1-ubyte.gz')
-        X_test = load_mnist_images('t10k-images-idx3-ubyte.gz')
-        y_test = load_mnist_labels('t10k-labels-idx1-ubyte.gz')
+        X_train = load_mnist_images('resources/train-images-idx3-ubyte.gz')
+        y_train = load_mnist_labels('resources/train-labels-idx1-ubyte.gz')
+        X_test = load_mnist_images('resources/t10k-images-idx3-ubyte.gz')
+        y_test = load_mnist_labels('resources/t10k-labels-idx1-ubyte.gz')
 
         # We reserve the last 10000 training examples for validation.
         X_train, X_val = X_train[:-10000], X_train[-10000:]

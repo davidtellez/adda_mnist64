@@ -127,13 +127,13 @@ def plot_results(results, output_path):
 if __name__ == "__main__":
 
     # Train classifier only (for comparison)
-    trainer = Trainer()
-    results = trainer.train(n_epochs=2, n_iterations=500, mini_batch_size=64, lr_0=0.001,
-                            k_classifier=10, k_discriminator=1, train_classifier_only=True)
-    plot_results(results, output_path='validation_64_classifier_only.png')
+    # trainer = Trainer()
+    # results = trainer.train(n_epochs=2, n_iterations=1000, mini_batch_size=64, lr_0=0.001,
+    #                         k_classifier=10, k_discriminator=1, train_classifier_only=True)
+    # plot_results(results, output_path='resources/validation_64_classifier_only.png')
 
     # Train classifier with domain adaptation
     trainer = Trainer()
-    results = trainer.train(n_epochs=2, n_iterations=500, mini_batch_size=64, lr_0=0.001,
+    results = trainer.train(n_epochs=2, n_iterations=1000, mini_batch_size=64, lr_0=0.001,
                             k_classifier=10, k_discriminator=1, train_classifier_only=False)
-    plot_results(results, output_path='validation_64_full.png')
+    plot_results(results, output_path='resources/validation_64_full.png')
